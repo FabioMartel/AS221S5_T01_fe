@@ -4,15 +4,12 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY package*.json /app
+COPY package*.json /app/
 
 RUN npm install
 
 COPY . /app
 
-RUN npm run build --prod
+EXPOSE 8080
 
-EXPOSE 4200
-
-ENTRYPOINT ["npm", "start"]
-
+CMD ["npm", "start"]
