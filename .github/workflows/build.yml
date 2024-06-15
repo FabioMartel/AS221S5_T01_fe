@@ -1,5 +1,4 @@
 name: SonarCloud
-
 on:
   push:
     branches:
@@ -7,7 +6,6 @@ on:
   pull_request:
     branches:
       - develop 
-
 jobs:
   #SONARCLOUD
   sonarcloud:
@@ -51,9 +49,10 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stding
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+  
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fabio:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/prueba:latest .
   
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/fabio:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/prueba:latest
